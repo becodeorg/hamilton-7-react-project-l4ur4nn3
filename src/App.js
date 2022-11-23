@@ -14,21 +14,37 @@ function App() {
             ).then(
                 data => {
                     setWeatherData(data)
+                    setCity("")
                 }
             )
         }
     }
 
-  return (
-    <div className='container'>
-      <input 
-      className='input' 
-      onChange={e => setCity(e.target.value)}
-      value={city}
-      onKeyPress={getWeather}
-      placeholder='Enter city... '></input>
-    </div>
-  )
+    return (
+        <div className='container'>
+            <input 
+            className='input' 
+            onChange={e => setCity(e.target.value)}
+            value={city}
+            onKeyPress={getWeather}
+            placeholder='Enter city... '
+            />
+
+            {typeof weatherData.main === 'undefined' ? (
+                <div>
+                    <p>Please enter a city</p>
+                </div>
+            ): (
+                <div>
+                    <p>{weatherData.name}</p>
+                    <p>{Math.round(weatherData.main.temp)}°C</p>
+                    <p>{weatherData.weather[0].main}</p>
+                </div>
+            )
+            }
+
+        </div>
+    )
 }
 
 export default App
