@@ -6,6 +6,8 @@ function App() {
     const apiKey = '4429ca6618a5716e1f7211f2cc56404c'
     const [weatherData, setWeatherData] = useState([{}])
     const [city, setCity] = useState("")
+    const [lat, setLat] = useState([{}])
+    const [lon, setLong] = useState([{}])
 
     const getWeather = (event) => {
         if (event.key == "Enter") {
@@ -18,7 +20,21 @@ function App() {
                 }
             )
         }
+        if (event.key == "Enter") {
+            fetch(`api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`).then(
+                response => response.json()
+            ).then(
+                data => {
+                    setLat(data)
+                    setLong(data)
+                }
+            )
+        }
     }
+    console.log(weatherData)
+    // const getLat = (event) => {
+        
+    // }
 
     return (
         <div className='container'>
@@ -39,6 +55,8 @@ function App() {
                     <p>{weatherData.name}</p>
                     <p>{Math.round(weatherData.main.temp)}°C</p>
                     <p>{weatherData.weather[0].main}</p>
+                    <p>{weatherData.coord.lat}</p>
+                    <p>{weatherData.coord.lon}</p>
                 </div>
             )
             }
