@@ -4,9 +4,6 @@ function App() {
     const apiKey = '4429ca6618a5716e1f7211f2cc56404c'
     const [weatherData, setWeatherData] = useState([{}])
     const [city, setCity] = useState("")
-    const [lat, setLat] = useState([])
-    const [lon, setLon] = useState([])
-    const [days, setDays] = useState([])
 
     const getWeather = (event) => {
         if (event.key == "Enter") {
@@ -20,25 +17,8 @@ function App() {
                     console.log(data.coord.lon)
                 }
             )
-        // }
-        // if (event.key == "Enter") {
-        //     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`).then(
-        //         response => response.json()
-        //     ).then(
-        //         data => {
-        //             setLat(data[0].lat)
-        //             setLon(data[0].lon)
-        //         }
-        //     )
-        // }
+        }
     }
-    // useEffect(() => {
-    //     fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`).then(
-    //             response => response.json()
-    //         ).then(
-                
-    //         )
-    // })
 
     return (
         <div className='container'>
