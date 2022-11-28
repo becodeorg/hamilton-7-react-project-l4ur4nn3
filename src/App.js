@@ -1,15 +1,18 @@
 import React, { useState } from 'react'
 import './App.css'
+import axios from "axios"
 import Search from './components/search/search'
 import CurrentWeather from './components/current-weather/current-weather'
-import { WEATHER_API_KEY, WEATHER_API_URL } from './api'
+import { WEATHER_API_KEY, WEATHER_API_URL, UNSPLASH_API_ACCESS_KEY, UNSPLASH_API_URL, UNSPLASH_API_SECRET_KEY } from './api'
 import Forecast from './components/forecast/forecast'
+import Unsplash from './components/unsplash/unsplash'
+
+
 
 function App() {
 
     const [currentWeather, setCurrentWeather] = useState(null);
     const [forecast, setForecast] = useState(null);
-
     //    const apiKey = '4429ca6618a5716e1f7211f2cc56404c'
     const handleOnSearchChange = (searchData) => {
         const [lat, lon] = searchData.value.split(" ");
@@ -66,6 +69,9 @@ function App() {
         //     {typeof weatherData.main === 'undefined' ? (
         <div>
             <Search onSearchChange={handleOnSearchChange} />
+
+            <Unsplash />
+
             {currentWeather && <CurrentWeather data={currentWeather} />}
             {/* <p>Please enter a city</p> */}
             {forecast && <Forecast data={forecast} />}
