@@ -1,15 +1,34 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import './App.css'
 import Search from './components/search/search'
-
-
+import CurrentWeather from './components/current-weather/current-weather'
+import { WEATHER_API_KEY, WEATHER_API_URL } from './api'
 
 function App() {
 
-//    const apiKey = '4429ca6618a5716e1f7211f2cc56404c'
+    const [currentWeather, setCurrentWeather] = useState(null);
+    const [forecast, setForecast] = useState(null);
+
+    //    const apiKey = '4429ca6618a5716e1f7211f2cc56404c'
     const handleOnSearchChange = (searchData) => {
-        console.log(searchData)
+        const [ lat, lon ] = searchData.value.split(" ");
+        
+        const currentWeatherFetch = fetch(`${WEATHER_API_URL}/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}`)
+        const forecastWeatherFetch = fetch(`${WEATHER_API_URL}/forecast?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}`)
+        
+        Promise.all([currentWeatherFetch, forecastWeatherFetch])
+        .then(async (response) => {
+            const weatherResponse = await response[0].json();
+            const forecastResponse = await response[1].json();
+            
+            setCurrentWeather({city: searchData.label , ...weatherResponse});
+            setForecast({city: searchData.label , ...forecastResponse});
+        })
+        .catch((err) => console.log(err));
     }
+
+    console.log(currentWeather);
+    console.log(forecast)
 
     // const [weatherData, setWeatherData] = useState([{}])
     // const [city, setCity] = useState("")
@@ -44,10 +63,11 @@ function App() {
         //     />
 
         //     {typeof weatherData.main === 'undefined' ? (
-                <div>
-                    <Search onSearchChange={handleOnSearchChange} />
-                    {/* <p>Please enter a city</p> */}
-                </div>
+        <div>
+            <Search onSearchChange={handleOnSearchChange} />
+            <CurrentWeather />
+            {/* <p>Please enter a city</p> */}
+        </div>
         //     ): (
         //         <div>
         //             <div>
