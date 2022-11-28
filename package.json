@@ -34,5 +34,29 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@becode/eslint-config": "^0.13.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^8.28.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-unicorn": "^45.0.0",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.0.4",
+    "prettier": "^2.8.0"
+  },
+  "lint-staged": {
+    "*.json": [
+      "npx prettier --write"
+    ],
+    "*.js": [
+      "npx eslint --fix --cache"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npx lint-staged"
+    }
   }
 }
