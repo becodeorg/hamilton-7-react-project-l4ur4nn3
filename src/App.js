@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import './App.css'
-import axios from "axios"
 import Search from './components/search/search'
 import CurrentWeather from './components/current-weather/current-weather'
 import { WEATHER_API_KEY, WEATHER_API_URL, UNSPLASH_API_ACCESS_KEY, UNSPLASH_API_URL, UNSPLASH_API_SECRET_KEY } from './api'
@@ -8,85 +7,45 @@ import Forecast from './components/forecast/forecast'
 import Unsplash from './components/unsplash/unsplash'
 
 
-
 function App() {
 
     const [currentWeather, setCurrentWeather] = useState(null);
     const [forecast, setForecast] = useState(null);
-    //    const apiKey = '4429ca6618a5716e1f7211f2cc56404c'
-    const handleOnSearchChange = (searchData) => {
-        const [lat, lon] = searchData.value.split(" ");
 
+    const [unsplash, setUnsplash] = useState();
+
+    const handleOnSearchChange = (searchData) => {
+        const [cityName, countryCodeTemp] = searchData.label.split(" ");
+        const [lat, lon] = searchData.value.split(" ");
         const currentWeatherFetch = fetch(`${WEATHER_API_URL}/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`)
         const forecastWeatherFetch = fetch(`${WEATHER_API_URL}/forecast?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`)
+        const unsplashFetch = fetch(`${UNSPLASH_API_URL}/?query=${cityName}&per_page=1&client_id=${UNSPLASH_API_ACCESS_KEY}`)
 
-        Promise.all([currentWeatherFetch, forecastWeatherFetch])
+        Promise.all([currentWeatherFetch, forecastWeatherFetch, unsplashFetch])
             .then(async (response) => {
                 const weatherResponse = await response[0].json();
                 const forecastResponse = await response[1].json();
+                const unsplashResponse = await response[2].json();
 
                 setCurrentWeather({ city: searchData.label, ...weatherResponse });
                 setForecast({ city: searchData.label, ...forecastResponse });
+                setUnsplash({city: searchData.label, ...unsplashResponse});
             })
             .catch((err) => console.log(err));
     }
 
     console.log(currentWeather);
-    console.log(forecast)
-
-    // const [weatherData, setWeatherData] = useState([{}])
-    // const [city, setCity] = useState("")
-    // const [lon, setLon] = useState("")
-    // const [lat, setLat] = useState("")
-
-    // const getWeather = (event) => {
-    //     if (event.key == "Enter") {
-    //         fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=${apiKey}`).then(
-    //             response => response.json()
-    //         ).then(
-    //             data => {
-    //                 setWeatherData(data)
-    //                 setCity("")
-    //                 // setLat(data.coord.lat)
-    //                 // setLon(data.coord.lon)
-    //                 console.log(data.coord.lon)
-    //             }
-    //         )
-    //         //     fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`)
-    //     }
-    // }
+    console.log(forecast);
+    console.log(unsplash)
 
     return (
-        // <div className='container'>
-        //     <input 
-        //     className='input' 
-        //     onChange={e => setCity(e.target.value)}
-        //     value={city}
-        //     onKeyPress={getWeather}
-        //     placeholder='Enter city... '
-        //     />
-
-        //     {typeof weatherData.main === 'undefined' ? (
         <div>
             <Search onSearchChange={handleOnSearchChange} />
-
-            <Unsplash />
-
+            {unsplash && <Unsplash data={unsplash} />}
             {currentWeather && <CurrentWeather data={currentWeather} />}
             {/* <p>Please enter a city</p> */}
             {forecast && <Forecast data={forecast} />}
         </div>
-        //     ): (
-        //         <div>
-        //             <div>
-        //             <p>{weatherData.name}</p>
-        //             <p>{Math.round(weatherData.main.temp)}°C</p>
-        //             <p>{weatherData.weather[0].main}</p>
-        //             </div>
-        //         </div>
-        //     )}   
-        // </div> */
-
     )
 }
 
