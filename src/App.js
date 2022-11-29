@@ -14,7 +14,6 @@ import Unsplash from "./components/unsplash/unsplash";
 function App() {
     const [currentWeather, setCurrentWeather] = useState(null);
     const [forecast, setForecast] = useState(null);
-
     const [unsplash, setUnsplash] = useState();
 
     const handleOnSearchChange = searchData => {
@@ -45,11 +44,11 @@ function App() {
 
     return (
         <div>
-            <Search onSearchChange={handleOnSearchChange} />
+            <h1 className="text-3xl p-5 text-center bg-stone-900 text-stone-400">Weather App</h1>
             {unsplash && <Unsplash data={unsplash} />}
             {currentWeather && <CurrentWeather data={currentWeather} />}
-            {/* <p>Please enter a city</p> */}
             {forecast && <Forecast data={forecast} />}
+            <Search onSearchChange={handleOnSearchChange} />
         </div>
     );
 }

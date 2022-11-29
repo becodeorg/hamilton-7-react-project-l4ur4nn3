@@ -8,13 +8,13 @@ import {
 } from "react-accessible-accordion";
 
 const WEEK_DAYS = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
+    "Monday ",
+    "Tuesday ",
+    "Wednesday ",
+    "Thursday ",
+    "Friday ",
+    "Saturday ",
+    "Sunday ",
 ];
 
 const Forecast = ({data}) => {
@@ -41,7 +41,7 @@ const Forecast = ({data}) => {
                                         {forecastDays[idx]}
                                     </label>
                                     <label className="description">
-                                        {item.weather[0].description}
+                                        {item.weather[0].description}  
                                     </label>
                                     <label className="temp">
                                         {Math.round(item.main.temp)}°C

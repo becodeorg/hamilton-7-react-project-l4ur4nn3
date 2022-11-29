@@ -2,10 +2,12 @@ import React from "react";
 
 const CurrentWeather = ({data}) => {
     return (
-        <div className="weather">
+        <div>                
+            <p className="city text-2xl p-5 text-center text-stone-100 bg-yellow-800">{data.city}</p>
+
+        <div className="weather bg-stone-200 ml-5 mr-5 p-5 rounded">
             <div className="top">
-                <p className="city">{data.city}</p>
-                <p className="weather-description">
+                <p>
                     {data.weather[0].description}
                 </p>
             </div>
@@ -28,6 +30,7 @@ const CurrentWeather = ({data}) => {
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     );
 };
