@@ -44,7 +44,9 @@ function App() {
 
     return (
         <div>
-            <h1 className="text-3xl p-5 text-center bg-stone-900 text-stone-400">Weather App</h1>
+            <h1 className="text-3xl p-5 text-center bg-stone-900 text-stone-400 
+            md:text-5xl
+            ">Weather App</h1>
             {unsplash && <Unsplash data={unsplash} />}
             {currentWeather && <CurrentWeather data={currentWeather} />}
             {forecast && <Forecast data={forecast} />}

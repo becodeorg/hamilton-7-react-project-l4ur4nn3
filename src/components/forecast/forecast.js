@@ -25,37 +25,39 @@ const Forecast = ({data}) => {
 
     return (
         <>
-            <div className="bg-stone-200 mt-5 ml-5 mr-5 p-5 rounded shadow-xl">
-            <label></label>
-            <Accordion allowZeroExpanded>
-                {data.list.splice(0, 7).map((item, idx) => (
-                    <AccordionItem key={idx}>
-                        <AccordionItemHeading>
-                            <AccordionItemButton>
-                                <div className="daily-item">
-                                    <label className="day text-2xl">
-                                        {forecastDays[idx]}
-                                    </label>
-                                    <div className="flex flex-row">
-                                    <img
-                                        alt="weather"
-                                        className="icon-small"
-                                        src={`icons/${item.weather[0].icon}.png`}
-                                    />
-                                    {/* <label className="description">
+            <div
+                className="bg-stone-200 mt-5 ml-5 mr-5 p-5 rounded shadow-xl 
+            ">
+                <label></label>
+                <Accordion allowZeroExpanded>
+                    {data.list.splice(0, 7).map((item, idx) => (
+                        <AccordionItem key={idx}>
+                            <AccordionItemHeading>
+                                <AccordionItemButton>
+                                    <div className="daily-item">
+                                        <label className="day text-2xl md:flex md:justify-center">
+                                            {forecastDays[idx]}
+                                        </label>
+                                        <div className="flex flex-row justify-center">
+                                            <img
+                                                alt="weather"
+                                                className="icon-small"
+                                                src={`icons/${item.weather[0].icon}.png`}
+                                            />
+                                            {/* <label className="description">
                                         {item.weather[0].description}  
                                     </label> */}
-                                    <label className="flex content-center self-center temp text-3xl pl-5">
-                                        {Math.round(item.main.temp)}°C
-                                    </label>
+                                            <label className="flex content-center self-center temp text-3xl pl-5">
+                                                {Math.round(item.main.temp)}°C
+                                            </label>
+                                        </div>
                                     </div>
-                                </div>
-                            </AccordionItemButton>
-                        </AccordionItemHeading>
-                        <AccordionItemPanel />
-                    </AccordionItem>
-                ))}
-            </Accordion>
+                                </AccordionItemButton>
+                            </AccordionItemHeading>
+                            <AccordionItemPanel />
+                        </AccordionItem>
+                    ))}
+                </Accordion>
             </div>
         </>
     );
