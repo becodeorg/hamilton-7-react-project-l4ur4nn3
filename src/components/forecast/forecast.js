@@ -34,7 +34,7 @@ const Forecast = ({data}) => {
                         <AccordionItem key={idx}>
                             <AccordionItemHeading>
                                 <AccordionItemButton>
-                                    <div className="daily-item">
+                                    <div className="daily-item lg:flex lg:flex-row lg:flex-wrap lg:justify-between lg:items-center lg:content-start">
                                         <label className="day text-2xl md:flex md:justify-center">
                                             {forecastDays[idx]}
                                         </label>
