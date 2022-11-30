@@ -21,4 +21,4 @@ React, JS(X), & Tailwind for the CSS.
 * The deployment. I was working with Parcel and there was no possibility to deploy without errors. After 2 days I remade it on Vite and it worked like a charm. It was a minor difficulty tho, it didn't restrain me, I could still work on my project meanwhile.
 
 ## Additional notes
-In the ressources files, you can find a pdf with my manual notes, code and the tutorials I followed.
+In the ressources folder, you can find a pdf with my manual notes, code and the tutorials I followed.
