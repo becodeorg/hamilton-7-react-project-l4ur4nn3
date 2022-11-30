@@ -1,15 +1,15 @@
 import React, {useState} from "react";
 import "./App.css";
-import Search from "./components/search/search";
-import CurrentWeather from "./components/current-weather/current-weather";
+import Search from "./components/search";
+import CurrentWeather from "./components/current-weather";
 import {
     WEATHER_API_KEY,
     WEATHER_API_URL,
     UNSPLASH_API_ACCESS_KEY,
     UNSPLASH_API_URL,
 } from "./api";
-import Forecast from "./components/forecast/forecast";
-import Unsplash from "./components/unsplash/unsplash";
+import Forecast from "./components/forecast";
+import Unsplash from "./components/unsplash";
 
 function App() {
     const [currentWeather, setCurrentWeather] = useState(null);
